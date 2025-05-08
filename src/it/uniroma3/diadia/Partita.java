@@ -14,34 +14,18 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 
 public class Partita {
 
-
-
-	private Stanza stanzaCorrente;
-	private Stanza stanzaVincente;
 	private boolean finita;
-	private Labirinto lab; 
+	private Labirinto labirinto; 
 	private Giocatore player;
 
 	public Partita(){
-		this.lab = new Labirinto();
+		this.labirinto = new Labirinto();
 		this.player = new Giocatore();
-
-		this.stanzaCorrente = lab.getStanzaIniziale(); //si comincia da stanza iniziale
-		this.stanzaVincente = lab.getStanzaFinale();  //stanza finale a cui si arriva per vincere
-
 		this.finita = false;
 	}
 
-	public Stanza getStanzaVincente() {
-		return stanzaVincente;
-	}
-
-	public void setStanzaCorrente(Stanza stanzaCorrente) {
-		this.stanzaCorrente = stanzaCorrente;
-	}
-
-	public Stanza getStanzaCorrente() {
-		return this.stanzaCorrente;
+	public Labirinto getLabirinto() {
+		return labirinto;
 	}
 
 	/**
@@ -49,7 +33,7 @@ public class Partita {
 	 * @return vero se partita vinta
 	 */
 	public boolean vinta() {
-		return this.getStanzaCorrente()== this.getStanzaVincente();
+		return this.labirinto.getStanzaCorrente()== this.labirinto.getStanzaVincente();
 	}
 
 	/**
@@ -77,7 +61,12 @@ public class Partita {
 	}
 
 	public String toString() {
-		return this.getStanzaCorrente() + "\nCFU = " + this.player.getCFU()
+		return this.getLabirinto().getStanzaCorrente() + "\nCFU = " + this.player.getCFU()
 		+ "\n" + this.player.getBorsa().toString();
+	}
+
+	public boolean giocatoreIsVivo() {
+		if(this.player.getCFU() == 0) return false;
+		return true;
 	}
 }
