@@ -13,14 +13,6 @@ import java.util.TreeSet;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.attrezzi.ComparatorePerNomeEPeso;
 
-/* 
-	
-	public boolean hasAttrezzo(String nomeAttrezzo) {
-		return this.getAttrezzo(nomeAttrezzo)!=null;
-	}
-	
-	
-} */
 
 public class Borsa{
 	private static final int PESO_MASSIMO_DEFAULT = 10;
@@ -71,6 +63,10 @@ public class Borsa{
 				a = attrezzo;
 
 		return a;
+	}
+	
+	public boolean hasAttrezzo(String nomeAttrezzo) {
+		return this.getAttrezzo(nomeAttrezzo)!=null;
 	}
 
 	public List<Attrezzo> getContenutoOrdinatoPerPeso(){
