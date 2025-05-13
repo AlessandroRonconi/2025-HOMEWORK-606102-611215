@@ -65,3 +65,23 @@ class StanzaTest {
 	}
 
 }
+
+//class StanzaTest {
+//	private Stanza stanza;
+//	private Attrezzo piuma;
+//	private Attrezzo martello;
+//	private Attrezzo martelletto;
+//	private Stanza adiacente1;
+//	private Stanza adiacente2;
+//	
+//	@BeforeEach
+//	void setUp() throws Exception {
+//		this.stanza = new Stanza("atrio");
+//		this.piuma = new Attrezzo("piuma", 1);
+//		this.martello = new Attrezzo("martello", 10);
+//		this.martelletto = new Attrezzo("martello", 2);
+//		
+//		
+//		
+//	}
+//}
