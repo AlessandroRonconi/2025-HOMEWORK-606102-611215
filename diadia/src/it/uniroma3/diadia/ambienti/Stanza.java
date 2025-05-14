@@ -45,7 +45,11 @@ public class Stanza {
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		this.stanzeAdiacenti.put(direzione, stanza);
+		if (!stanzeAdiacenti.containsKey(direzione) && stanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI) {
+            stanzeAdiacenti.put(direzione, stanza);
+        } else {
+            stanzeAdiacenti.put(direzione, stanza);
+        }
 	}
 
 	/*
@@ -86,8 +90,7 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		this.attrezzi.add(attrezzo);
-		return true;
+		return this.attrezzi.add(attrezzo);
 	}
 
 	/*

@@ -4,117 +4,145 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-/* class BorsaTest {
+class BorsaTest {
 	private Borsa bag;
 	private Attrezzo spada;
 	private Attrezzo martello;
 	private Attrezzo ascia;
-	private Attrezzo candela;
-	@BeforeEach
-	void getUp() throws Exception{
-		bag = new Borsa(10);
-		spada = new Attrezzo("spada",9);
-		martello = new Attrezzo("martello",3);
-		ascia = new Attrezzo("ascia",12);
-		candela = new Attrezzo("candela",1);
-	}
-	@Test
-	void testAggiungo1IsEmpty1() {
-		this.bag.addAttrezzo(spada);
-		assertFalse(this.bag.hasAttrezzo("spada")==false);
-		assertFalse(this.bag.isEmpty());
-		assertTrue(this.bag.getAttrezzo("spada").getPeso()==9);
-
-	}
-	@Test
-	void testAggiungo2IsEmpty2ERemove1() {
-		this.bag.addAttrezzo(spada);
-		assertTrue(this.bag.hasAttrezzo("spada")==true);
-		this.bag.removeAttrezzo("spada");
-		assertTrue(this.bag.isEmpty());
-		assertTrue(this.bag.getPeso()==0);
-
-	}
-
-	@Test
-	void testAggiungo3IsEmpty3Remove2e3() {
-		this.bag.addAttrezzo(spada);
-		assertTrue(this.bag.hasAttrezzo("spada")==true);
-		this.bag.removeAttrezzo("spada");
-		assertTrue(this.bag.hasAttrezzo("spada")==false);
-		this.bag.addAttrezzo(martello);
-		assertTrue(this.bag.getAttrezzo("martello").getPeso()==3);
-		this.bag.removeAttrezzo("martello");
-		assertTrue(this.bag.isEmpty());
-
-	}
-	@Test
-	void testMettoOggettoMaPesaTroppo() {
-		this.bag.addAttrezzo(ascia);
-		assertTrue(this.bag.getPeso()==0);
-		assertTrue(this.bag.isEmpty()==true);
-	}
-	@Test
-	void testAggiungiPiuOggettiCheSforano() {
-		this.bag.addAttrezzo(spada);
-		this.bag.addAttrezzo(martello);
-		assertTrue(this.bag.getPeso()==9);
-		assertTrue(this.bag.hasAttrezzo("martello")==false);
-	}
-
-	@Test
-	void testAggiungiPiuOggettiCheNonSforzano() {
-		this.bag.addAttrezzo(spada);
-		this.bag.addAttrezzo(candela);
-		assertTrue(this.bag.getPeso()==10);
-		assertTrue(this.bag.hasAttrezzo("candela")==true);
-	}
-
-
-
-
-} */
-
-class BorsaTest{
-	private Borsa vuota;
 	private Attrezzo piuma;
-	private Attrezzo martello;
 	private Attrezzo martelletto;
-	private Borsa borsa;
-
+	private Attrezzo incudine;
+	
 	@BeforeEach
 	void setUp() throws Exception{
-		this.vuota = new Borsa();
-		this.piuma = new Attrezzo("piuma", 1);
+		this.bag = new Borsa();
+		this.spada = new Attrezzo("spada",9);
+		this.ascia = new Attrezzo("ascia",12);
+		this.piuma = new Attrezzo("piuma",1);
 		this.martello = new Attrezzo("martello", 10);
 		this.martelletto = new Attrezzo("martello", 2);
-		
-		this.borsa = new Borsa();
+		this.incudine = new Attrezzo("incudine", 10);
 	}
-
+	
 	@Test
 	void testBorsaVuota() {
-		assertEquals(0, this.vuota.getPeso());
+		assertEquals(0, this.bag.getPeso());
 	}
-
+	
 	@Test
-	void testBorsa2Attrezzi() {
-		vuota.addAttrezzo(piuma);
-		vuota.addAttrezzo(martello);
-		assertEquals(11, this.vuota.getPeso());
+	void testAggiungo1Attrezzo() {
+		this.bag.addAttrezzo(spada);
+		assertTrue(this.bag.hasAttrezzo("spada"));
+		assertFalse(this.bag.isEmpty());
+		assertEquals(this.bag.getAttrezzo("spada").getPeso(), 9);
+	}
+	
+	@Test
+	void testAggiungo1AttrezzoELoRimuovo() {
+		this.bag.addAttrezzo(spada);
+		assertTrue(this.bag.hasAttrezzo("spada"));
+		this.bag.removeAttrezzo("spada");
+		assertTrue(this.bag.isEmpty());
+		assertEquals(this.bag.getPeso(), 0);
+	}
+	
+	@Test
+	void testAggiungo1AttrezzoCheSfora() {
+		this.bag.addAttrezzo(ascia);
+		assertEquals(this.bag.getPeso(), 0);
+		assertTrue(this.bag.isEmpty());
+	}
+	
+	@Test
+	void testAggiungo2Attrezzi() {
+		this.bag.addAttrezzo(piuma);
+		this.bag.addAttrezzo(spada);
+		assertEquals(10, this.bag.getPeso());
+	}
+	
+	@Test
+	void testAggiungo2AttrezziCheSforano() {
+		this.bag.addAttrezzo(spada);
+		this.bag.addAttrezzo(martello);
+		assertEquals(this.bag.getPeso(), 9);
+		assertFalse(this.bag.hasAttrezzo("martello"));
+	}
+	
+	@Test
+	void testGetContenutoOrdinatoPerPeso() {
+		Borsa borsa = new Borsa(30);
+		borsa.addAttrezzo(incudine);
+		borsa.addAttrezzo(piuma);
+		borsa.addAttrezzo(martello);
+		
+		List<Attrezzo> ordinati = List.of(piuma, incudine, martello);
+		assertEquals(ordinati, borsa.getContenutoOrdinatoPerPeso());
+		
 	}
 	
 	@Test
 	void testGetContenutoOrdinatoPerNome(){
-		this.borsa.addAttrezzo(this.martello);
+		Borsa borsa = new Borsa(30);
+		
+		borsa.addAttrezzo(martello);
 		assertEquals(1,borsa.getNumeroAttrezzi());
 		assertEquals(1,borsa.getContenutoOrdinatoPerNome().size());
-		this.borsa.addAttrezzo(this.martelletto);
+		
+		borsa.addAttrezzo(martelletto);
 		assertEquals(2,borsa.getNumeroAttrezzi());
-		assertEquals(2,borsa.getContenutoOrdinatoNome().size());
-	}
+		assertEquals(2,borsa.getContenutoOrdinatoPerNome().size());
+		
+		borsa.addAttrezzo(spada);
+		assertEquals(3,borsa.getNumeroAttrezzi());
+		assertEquals(3,borsa.getContenutoOrdinatoPerNome().size());
 
+		List<Attrezzo> attesi = List.of(martelletto, martello, spada);  // [martelletto, martello, spada]
+		assertEquals(attesi, new ArrayList<>(borsa.getContenutoOrdinatoPerNome()));
+	}
+	
+	@Test
+	void testGetContenutoRaggruppatoPerPeso() {
+		Borsa borsa = new Borsa(30);
+		borsa.addAttrezzo(incudine);
+		borsa.addAttrezzo(piuma);
+		borsa.addAttrezzo(spada);
+		borsa.addAttrezzo(martello);
+		
+
+		Map<Integer, Set<Attrezzo>> mappa = borsa.getContenutoRaggruppatoPerPeso();
+
+
+		assertEquals(3, mappa.size());		// verifica che ci siano 3 gruppi di peso: 1, 9, 10
+
+		
+		assertTrue(mappa.containsKey(10));  // Verifica presenza attrezzi nel gruppo di peso 5
+		assertTrue(mappa.get(10).contains(martello));
+		assertTrue(mappa.get(10).contains(incudine));
+		assertEquals(2, mappa.get(10).size());
+
+		// Verifica altri gruppi
+		assertEquals(Set.of(spada), mappa.get(9));
+		assertEquals(Set.of(piuma), mappa.get(1));
+		
+	}
+	
+	@Test
+	void testGetSortedSetOrdinatoPerPeso() {
+		Borsa borsa = new Borsa(30);
+		borsa.addAttrezzo(incudine);
+		borsa.addAttrezzo(piuma);
+		borsa.addAttrezzo(martello);
+		
+		List<Attrezzo> ordinati = List.of(piuma, incudine, martello);
+		assertEquals(ordinati, new ArrayList<>(borsa.getSortedSetOrdinatoPerPeso()));
+		
+	}
 }
