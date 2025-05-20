@@ -160,4 +160,12 @@ public class Stanza {
 		return new HashSet<>(this.stanzeAdiacenti.keySet());
 	}
 
+	public Map<String, Stanza> getMapStanzeAdiacenti() {
+		return this.stanzeAdiacenti;
+	}
+
+	public boolean isMagica() {
+		return false;
+	}
+
 }

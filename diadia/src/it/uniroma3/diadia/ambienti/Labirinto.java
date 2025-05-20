@@ -56,4 +56,33 @@ public class Labirinto {
 	public Stanza getStanzaVincente() {
 		return this.stanzaVincente;
 	}
+
+	public LabirintoBuilder addStanzaIniziale(String nomeStanza) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LabirintoBuilder addStanzaVincente(String nomeStanza) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LabirintoBuilder addAttrezzo(String nome, int peso) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public LabirintoBuilder addAdiacenza(String stanzaACuiAggiungiDirezione, String stanzaDaAggiungere,
+			String direzione) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Labirinto getLabirinto() {
+		return this;
+	}
+	
+	public void setStanzaVincente(Stanza stanza) {
+		this.stanzaVincente = stanza;
+	}
 }

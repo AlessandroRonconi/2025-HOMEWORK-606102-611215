@@ -32,4 +32,9 @@ public class StanzaMagica extends Stanza {
 		attrezzo = new Attrezzo(nomeInvertito.toString(), pesoX2);
 		return attrezzo;
 	}
+	
+	@Override
+	public boolean isMagica() {
+		return true;
+	}
 }
