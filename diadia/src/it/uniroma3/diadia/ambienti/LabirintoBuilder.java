@@ -13,7 +13,7 @@ public class LabirintoBuilder extends Labirinto{
 		this.listaStanze = new HashMap<>();
 	}
 	
-	@Override
+
 	public LabirintoBuilder addStanzaIniziale(String nomeStanza) {
 		Stanza stanzaIniziale = new Stanza(nomeStanza);
 		this.setStanzaCorrente(stanzaIniziale);
@@ -21,7 +21,7 @@ public class LabirintoBuilder extends Labirinto{
 		nomeStanzaIniziale = stanzaIniziale;
 		return this;
 	}
-	@Override
+
 	public LabirintoBuilder addStanzaVincente(String nomeStanza) {
 		Stanza stanzaVincente = new Stanza(nomeStanza);
 		ultimaStanzaAggiunta = stanzaVincente;
@@ -29,7 +29,6 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 	
-	@Override
 	public LabirintoBuilder addAttrezzo(String nome, int peso) {
 		if(this.ultimaStanzaAggiunta!=null) {
 			Attrezzo attrezzo = new Attrezzo(nome,peso);
@@ -37,7 +36,7 @@ public class LabirintoBuilder extends Labirinto{
 		}
 		return this;
 	}
-	@Override
+
 	public LabirintoBuilder addAdiacenza(String stanzaACuiAggiungiDirezione, String stanzaDaAggiungere, String direzione) {
 		if(this.ultimaStanzaAggiunta!= null && 
 		   !(this.nomeStanzaIniziale.getNome().equals(this.ultimaStanzaAggiunta.getNome()))) {
