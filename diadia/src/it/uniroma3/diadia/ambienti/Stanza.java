@@ -167,5 +167,14 @@ public class Stanza {
 	public boolean isMagica() {
 		return false;
 	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+		Stanza that = (Stanza) obj;
+		return this.getNome().equals(that.getNome());
+	}
 
 }

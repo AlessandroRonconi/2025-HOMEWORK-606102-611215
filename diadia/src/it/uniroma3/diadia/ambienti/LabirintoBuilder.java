@@ -7,7 +7,7 @@ public class LabirintoBuilder extends Labirinto{
 	
 	private Map<String, Stanza> listaStanze;
 	private Stanza ultimaStanzaAggiunta;
-	private Stanza nomeStanzaIniziale;
+	private Stanza stanzaIniziale;
 
 	public LabirintoBuilder() {
 		this.listaStanze = new HashMap<>();
@@ -15,17 +15,19 @@ public class LabirintoBuilder extends Labirinto{
 	
 
 	public LabirintoBuilder addStanzaIniziale(String nomeStanza) {
-		Stanza stanzaIniziale = new Stanza(nomeStanza);
-		this.setStanzaCorrente(stanzaIniziale);
-		ultimaStanzaAggiunta = stanzaIniziale;
-		nomeStanzaIniziale = stanzaIniziale;
-		return this;
+	    Stanza stanzaIniziale = new Stanza(nomeStanza);
+	    this.setStanzaCorrente(stanzaIniziale);
+	    this.stanzaIniziale = stanzaIniziale;
+	    this.ultimaStanzaAggiunta = stanzaIniziale;
+	    this.listaStanze.put(nomeStanza, stanzaIniziale);
+	    return this;
 	}
 
 	public LabirintoBuilder addStanzaVincente(String nomeStanza) {
 		Stanza stanzaVincente = new Stanza(nomeStanza);
 		ultimaStanzaAggiunta = stanzaVincente;
 		this.setStanzaVincente(stanzaVincente);
+		this.listaStanze.put(nomeStanza, stanzaVincente);
 		return this;
 	}
 	
@@ -37,12 +39,13 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 
-	public LabirintoBuilder addAdiacenza(String stanzaACuiAggiungiDirezione, String stanzaDaAggiungere, String direzione) {
-		if(this.ultimaStanzaAggiunta!= null && 
-		   !(this.nomeStanzaIniziale.getNome().equals(this.ultimaStanzaAggiunta.getNome()))) {
-			
-		}
-		return this;
+	public LabirintoBuilder addAdiacenza(String nomeStanzaPartenza, String nomeStanzaDestinazione, String direzione) {
+	    Stanza partenza = this.listaStanze.get(nomeStanzaPartenza);
+	    Stanza destinazione = this.listaStanze.get(nomeStanzaDestinazione);
+	    if (partenza != null && destinazione != null) {
+	        partenza.impostaStanzaAdiacente(direzione, destinazione);
+	    }
+	    return this;
 	}
 	
 	public LabirintoBuilder addStanza(String nome) {
@@ -75,10 +78,5 @@ public class LabirintoBuilder extends Labirinto{
 	
 	public Map<String,Stanza> getListaStanze() {
 		return this.listaStanze;
-	}
-	
-	
-	
-
-	
+	}	
 }

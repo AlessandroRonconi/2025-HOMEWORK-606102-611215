@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
 
+import it.uniroma3.diadia.attrezzi.Attrezzo;
+
 public class StanzaBloccata extends Stanza{
 	
 	private String direzioneBloccata;
@@ -26,5 +28,22 @@ public class StanzaBloccata extends Stanza{
 					" è bloccata. Serve l'attrezzo: " + nomeAttrezzoSblocco;
 		}
 		return super.getDescrizione();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+	    if (this == obj) return true;
+	    if (obj == null || getClass() != obj.getClass()) return false;
+		StanzaBloccata that = (StanzaBloccata) obj;
+		return this.getNome().equals(that.getNome()) && this.getDirezioneBloccata().equals(that.getDirezioneBloccata()) &&
+				this.getNomeAttrezzoSblocco().equals(that.getNomeAttrezzoSblocco());
+	}
+
+	private String getDirezioneBloccata() {
+		return this.direzioneBloccata;
+	}
+	
+	private String getNomeAttrezzoSblocco() {
+		return this.nomeAttrezzoSblocco;
 	}
 }
