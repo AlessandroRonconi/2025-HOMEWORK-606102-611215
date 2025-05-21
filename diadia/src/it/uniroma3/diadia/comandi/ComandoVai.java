@@ -7,7 +7,7 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
  * e ne stampa il nome, altrimenti stampa un messaggio di errore
  */
-public class ComandoVai implements Comando {
+public class ComandoVai extends AbstractComando {
 	private String direzione;
 
 	/**
@@ -31,6 +31,7 @@ public class ComandoVai implements Comando {
 		io.mostraMessaggio(partita.toString());
 		partita.getGiocatore().setCFU(partita.getGiocatore().getCFU()-1);
 	}
+	
 	@Override
 	public void setParametro(String parametro) {
 		this.direzione = parametro;

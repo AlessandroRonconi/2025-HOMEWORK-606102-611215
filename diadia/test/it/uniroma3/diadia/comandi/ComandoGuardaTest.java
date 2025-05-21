@@ -3,6 +3,9 @@ package it.uniroma3.diadia.comandi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +19,9 @@ class ComandoGuardaTest {
 	
 	@Test
 	public void testPartitaConComandoGuarda(){
-		String[] daLeggere = {"guarda","fine"};
+		List<String> daLeggere = new ArrayList<>();
+		daLeggere.add("guarda");
+		daLeggere.add("fine");
 		IOSimulator io = new IOSimulator(daLeggere);
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();

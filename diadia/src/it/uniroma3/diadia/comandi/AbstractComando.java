@@ -14,11 +14,11 @@ import it.uniroma3.diadia.Partita;
  * @author  docente di POO
  * @version base
  */
-public interface Comando {
+public abstract class AbstractComando {
 
 	/**
 	 * esecuzione del comando
 	 */
-	public void esegui(Partita partita, IO io);
-	public void setParametro(String parametro);
+	public abstract void esegui(Partita partita, IO io);
+	public void setParametro(String parametro) {}
 }

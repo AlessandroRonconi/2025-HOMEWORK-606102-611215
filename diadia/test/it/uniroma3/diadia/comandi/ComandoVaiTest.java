@@ -3,6 +3,9 @@ package it.uniroma3.diadia.comandi;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,7 @@ public class ComandoVaiTest {
 	private Stanza stanza1;
 	private Stanza stanza2;
 	private IO io;
-	private Comando comando;
+	private AbstractComando comando;
 
 	@BeforeEach
 	void setUp() throws Exception{
@@ -57,7 +60,8 @@ public class ComandoVaiTest {
 	
 	@Test
 	public void testPartitaConComandoVai(){
-		String[] daLeggere = {"vai nord"};
+		List<String> daLeggere = new ArrayList<>();
+		daLeggere.add("vai nord");
 		IOSimulator io = new IOSimulator(daLeggere);
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();

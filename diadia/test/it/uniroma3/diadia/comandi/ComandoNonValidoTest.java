@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOSimulator;
 
@@ -16,7 +19,9 @@ class ComandoNonValidoTest {
 	
 	@Test
 	public void testPartitaConComandoNonValido(){
-		String[] daLeggere = {" ","fine"};
+		List<String> daLeggere = new ArrayList<>();
+		daLeggere.add(" ");
+		daLeggere.add("fine");
 		IOSimulator io = new IOSimulator(daLeggere);
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();

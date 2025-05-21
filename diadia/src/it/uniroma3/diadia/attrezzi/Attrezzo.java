@@ -43,6 +43,10 @@ public class Attrezzo implements Comparable<Attrezzo> {
 		return this.peso;
 	}
 	
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+	
 	@Override
 	public int compareTo(Attrezzo that) {
 		int cmp = this.getNome().compareTo(that.getNome());

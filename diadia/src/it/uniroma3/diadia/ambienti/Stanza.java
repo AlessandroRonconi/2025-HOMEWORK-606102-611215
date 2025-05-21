@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 /*
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -27,6 +28,8 @@ public class Stanza {
 
 	private List<Attrezzo> attrezzi;
 	private Map<String, Stanza> stanzeAdiacenti;
+	
+	private AbstractPersonaggio personaggio;
 
 	/*
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -45,11 +48,11 @@ public class Stanza {
 	 * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
 	 */
 	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-		if (!stanzeAdiacenti.containsKey(direzione) && stanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI) {
-            stanzeAdiacenti.put(direzione, stanza);
-        } else {
-            stanzeAdiacenti.put(direzione, stanza);
-        }
+		if (stanzeAdiacenti.size() < NUMERO_MASSIMO_DIREZIONI) {
+			if (!stanzeAdiacenti.containsKey(direzione))
+				stanzeAdiacenti.put(direzione, stanza);
+			else stanzeAdiacenti.put(direzione, stanza);
+		}
 	}
 
 	/*
@@ -156,23 +159,34 @@ public class Stanza {
 	}
 
 
-	public Set<String> getDirezioni() {
-		return new HashSet<>(this.stanzeAdiacenti.keySet());
+	public List<String> getDirezioni() {
+	    return new ArrayList<>(this.stanzeAdiacenti.keySet());
 	}
 
 	public Map<String, Stanza> getMapStanzeAdiacenti() {
 		return this.stanzeAdiacenti;
 	}
+	
+	public List<Stanza> getStanzeAdiacenti() {
+	    return new ArrayList<>(this.stanzeAdiacenti.values());
+	}
 
 	public boolean isMagica() {
 		return false;
 	}
-	
-	
+
+	public void setPersonaggio(AbstractPersonaggio personaggio) {
+		this.personaggio = personaggio;
+	}
+	public AbstractPersonaggio getPersonaggio() {
+		return this.personaggio;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
-	    if (this == obj) return true;
-	    if (obj == null || getClass() != obj.getClass()) return false;
+		if (this == obj) return true;
+		if (obj == null || getClass() != obj.getClass()) return false;
 		Stanza that = (Stanza) obj;
 		return this.getNome().equals(that.getNome());
 	}

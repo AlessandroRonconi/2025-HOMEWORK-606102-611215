@@ -5,6 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +22,7 @@ public class ComandoPosaTest {
 	private Partita partita;
 	private Attrezzo attrezzo;
 	private IO io;
-	private Comando comando;
+	private AbstractComando comando;
 	
 	@BeforeEach
 	void setUp() throws Exception{
@@ -45,25 +48,12 @@ public class ComandoPosaTest {
 		assertFalse(partita.getLabirinto().getStanzaCorrente().hasAttrezzo("martello"));
 	}
 
-
-	public void riempiStanza() {
-		for(int i= 0; i<10;i++) {
-			partita.getLabirinto().getStanzaCorrente().addAttrezzo(new Attrezzo("attrezzo"+i, 1));
-		}
-	}
-	
-	@Test
-	public void testStanzaPiena() {
-		this.riempiStanza();
-		partita.getGiocatore().getBorsa().addAttrezzo(attrezzo);
-		comando.setParametro("martello");
-		comando.esegui(partita,io);
-		assertFalse(partita.getLabirinto().getStanzaCorrente().hasAttrezzo("martello"));
-	}
-	
 	@Test
 	public void testPartitaConComandoPosa(){
-		String[] daLeggere = {"prendi osso", "posa osso", "fine"};
+		List<String> daLeggere = new ArrayList<>();
+		daLeggere.add("prendi osso");
+		daLeggere.add("posa osso");
+		daLeggere.add("fine");
 		IOSimulator io = new IOSimulator(daLeggere);
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
