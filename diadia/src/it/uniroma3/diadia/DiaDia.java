@@ -4,7 +4,7 @@ import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.AbstractComando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -62,14 +62,19 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione, IO io) {
 		AbstractComando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiFisarmonica();
-				comandoDaEseguire = factory.costruisciComando(istruzione);
-		comandoDaEseguire.esegui(this.partita,io);
-		if (this.partita.vinta())
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
 
+		try {
+			comandoDaEseguire = factory.costruisciComando(istruzione);
+			comandoDaEseguire.esegui(this.partita, io);
+		} catch (Exception e) {
+			io.mostraMessaggio("Errore nell'esecuzione del comando: " + e.getMessage());
+			return false;
+		}
+
+		if (this.partita.vinta())
 			io.mostraMessaggio("Hai vinto!");
 		if (!this.partita.giocatoreIsVivo())
-
 			io.mostraMessaggio("Hai esaurito i CFU...");
 
 		return this.partita.isFinita();

@@ -33,8 +33,7 @@ public class LabirintoBuilder extends Labirinto{
 	
 	public LabirintoBuilder addAttrezzo(String nome, int peso) {
 		if(this.ultimaStanzaAggiunta!=null) {
-			Attrezzo attrezzo = new Attrezzo(nome,peso);
-			this.ultimaStanzaAggiunta.addAttrezzo(attrezzo);
+			this.ultimaStanzaAggiunta.addAttrezzo(new Attrezzo(nome,peso));
 		}
 		return this;
 	}
