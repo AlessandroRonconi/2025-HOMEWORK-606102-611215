@@ -254,9 +254,6 @@ public class LabirintoBuilderTest {
 		.addAttrezzo(nomeAttrezzo1, peso1)
 		.addAttrezzo(nomeAttrezzo2, peso2);
 		Map<String, Stanza> listaStanze = labirintoBuilder.getListaStanze();
-		for (Attrezzo a : listaStanze.get(nomeStanzaMagica).getAttrezzi()) {
-		    System.out.println("Attrezzo nella stanza: " + a);
-		}
 		assertEquals(new Attrezzo(nomeAttrezzo2Inv,peso2_x2), listaStanze.get(nomeStanzaMagica).getAttrezzo(nomeAttrezzo2Inv));
 		assertEquals(new Attrezzo(nomeAttrezzo1,peso1), listaStanze.get(nomeStanzaMagica).getAttrezzo(nomeAttrezzo1));
 	}

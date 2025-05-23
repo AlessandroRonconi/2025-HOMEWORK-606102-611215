@@ -21,9 +21,8 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoV’
 		nomeClasse.append( nomeComando.substring(1) ) ;
 		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoVai’
+		
 		comando = (AbstractComando)Class.forName(nomeClasse.toString()).getDeclaredConstructor().newInstance();
-		// POSSIBILE ALTERNATIVA basata sul rendere il tipo Class<Comando> esplicito:
-		// comando = ((Class<Comando>)Class.forName(nomeClasse.toString())).newInstance();
 		comando.setParametro(parametro);
 		return comando;
 	}

@@ -67,8 +67,8 @@ public class DiaDia {
 		try {
 			comandoDaEseguire = factory.costruisciComando(istruzione);
 			comandoDaEseguire.esegui(this.partita, io);
-		} catch (Exception e) {
-			io.mostraMessaggio("Errore nell'esecuzione del comando: " + e.getMessage());
+		} catch (Exception comandoNonValido) {
+			io.mostraMessaggio("Comando non valido");
 			return false;
 		}
 

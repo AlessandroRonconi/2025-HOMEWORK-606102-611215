@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -93,7 +94,10 @@ public class Stanza {
 	 * @return true se riesce ad aggiungere l'attrezzo, false atrimenti.
 	 */
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		return this.attrezzi.add(attrezzo);
+	    for (Attrezzo a : this.attrezzi)
+	        if (a.getNome().equals(attrezzo.getNome()))
+	            return false;
+	    return this.attrezzi.add(attrezzo);
 	}
 
 	/*
@@ -186,9 +190,14 @@ public class Stanza {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) return true;
-		if (obj == null || getClass() != obj.getClass()) return false;
+		if (obj == null || !(obj instanceof Stanza)) return false;
 		Stanza that = (Stanza) obj;
 		return this.getNome().equals(that.getNome());
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.nome);
 	}
 
 }

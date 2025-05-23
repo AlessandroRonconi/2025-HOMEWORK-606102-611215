@@ -30,14 +30,14 @@ public class StanzaBloccata extends Stanza{
 		return super.getDescrizione();
 	}
 	
-	@Override
-	public boolean equals(Object obj) {
-	    if (this == obj) return true;
-	    if (obj == null || getClass() != obj.getClass()) return false;
-		StanzaBloccata that = (StanzaBloccata) obj;
-		return this.getNome().equals(that.getNome()) && this.getDirezioneBloccata().equals(that.getDirezioneBloccata()) &&
-				this.getNomeAttrezzoSblocco().equals(that.getNomeAttrezzoSblocco());
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//	    if (this == obj) return true;
+//	    if (obj == null || getClass() != obj.getClass()) return false;
+//		StanzaBloccata that = (StanzaBloccata) obj;
+//		return this.getNome().equals(that.getNome()) && this.getDirezioneBloccata().equals(that.getDirezioneBloccata()) &&
+//				this.getNomeAttrezzoSblocco().equals(that.getNomeAttrezzoSblocco());
+//	}
 
 	private String getDirezioneBloccata() {
 		return this.direzioneBloccata;
