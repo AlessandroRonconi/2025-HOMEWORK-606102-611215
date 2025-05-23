@@ -31,13 +31,14 @@ public class Mago extends AbstractPersonaggio {
 	
 	@Override
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
-		if(attrezzo==null) return null;
+		if(attrezzo==null) return "Poffarbacco, che gran svista, "
+				+ "sembra che il tuo regalo non esista!";
 		int peso = attrezzo.getPeso()/2;
 		attrezzo.setPeso(peso);
 		partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo);
 		return "L'attrezzo "+ attrezzo.getNome() +" che mi hai dato "
 				+ "ora piu' leggero e' diventato "
-				+ "ed in terra lo ho buttato.";	
+				+ "ed in terra lo ho posato.";	
 		
 	}
 }

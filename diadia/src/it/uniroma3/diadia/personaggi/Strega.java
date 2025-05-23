@@ -76,7 +76,7 @@ public class Strega extends AbstractPersonaggio{
 	public String riceviRegalo(Attrezzo attrezzo, Partita partita) {
 		if(attrezzo == null) return null;
 		else {
-			partita.getGiocatore().getBorsa().removeAttrezzo(attrezzo.getNome());
+			this.attrezzo = attrezzo;
 			String msg = MESSAGGIO_DONO;
 			return msg;
 		}

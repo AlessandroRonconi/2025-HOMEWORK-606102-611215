@@ -10,7 +10,6 @@ public class ComandoInteragisci extends AbstractComando {
 			"Con chi dovrei interagire?...";
 
 	private String messaggio;
-	private IO io;
 
 	@Override
 	public void esegui(Partita partita, IO io) {

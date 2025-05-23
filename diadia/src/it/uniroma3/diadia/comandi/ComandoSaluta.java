@@ -9,7 +9,6 @@ public class ComandoSaluta extends AbstractComando{
 
 			"Chi dovrei salutare?...";
 	
-	private IO io;
 	private String messaggio;
 
 	@Override
