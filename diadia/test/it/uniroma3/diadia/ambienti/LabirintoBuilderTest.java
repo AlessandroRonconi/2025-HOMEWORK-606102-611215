@@ -24,6 +24,44 @@ public class LabirintoBuilderTest {
 	}
 
 	@Test
+	public void testGetLabirinto() {
+		assertNotNull(labirintoBuilder.getLabirinto());
+		assertEquals(LabirintoBuilder.class, labirintoBuilder.getLabirinto().getClass());
+	}
+
+	@Test
+	public void testAddStanza() {
+		labirintoBuilder.addStanza("stanzetta");
+		Stanza expected = new Stanza("stanzetta");
+		assertEquals(expected, labirintoBuilder.getListaStanze().get("stanzetta"));
+	}
+
+	@Test
+	public void testAddAttrezzoSenzaStanza(){
+		
+		//lb.addAttrezzo("cacciavite", 3);
+		//Attrezzo expected = new Attrezzo("cacciavite", 3);
+		assertEquals(LabirintoBuilder.class, labirintoBuilder.addAttrezzo("cacciavite", 3).getClass());
+	}
+	
+	@Test
+	public void testAddAttrezzoConStanza(){
+		labirintoBuilder.addStanzaIniziale("stanzetta").addAttrezzo("cacciavite", 3);
+		Attrezzo expected = new Attrezzo("cacciavite", 3);
+		assertEquals(expected, labirintoBuilder.getLabirinto().getStanzaCorrente().getAttrezzo("cacciavite"));
+		assertTrue(labirintoBuilder.getListaStanze().get("stanzetta").hasAttrezzo("cacciavite"));
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	//test del professore per verificare che funzioni LabirintoBuilder
+	@Test
 	public void testMonolocale() {
 		Labirinto monolocale = labirintoBuilder
 				.addStanzaIniziale(nomeStanzaIniziale)

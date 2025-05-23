@@ -47,13 +47,6 @@ public class LabirintoBuilder extends Labirinto{
 		return this;
 	}
 
-	//	public LabirintoBuilder addStanza(String nome) {
-	//		Stanza nuova = new Stanza(nome);
-	//		this.listaStanze.put(nome, nuova);
-	//		this.ultimaStanzaAggiunta = nuova;
-	//		return this;
-	//	}
-
 	public LabirintoBuilder addStanza(String nome) {
 		if (!this.listaStanze.containsKey(nome)) {
 			Stanza nuova = new Stanza(nome);
