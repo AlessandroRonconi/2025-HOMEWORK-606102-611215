@@ -21,4 +21,7 @@ public abstract class AbstractComando {
 	 */
 	public abstract void esegui(Partita partita, IO io);
 	public void setParametro(String parametro) {}
+	public String getParametro() {
+		return null;
+	}
 }
