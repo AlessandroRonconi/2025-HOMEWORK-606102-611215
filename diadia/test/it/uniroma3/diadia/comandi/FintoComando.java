@@ -3,7 +3,7 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoDummy extends AbstractComando{
+public class FintoComando extends AbstractComando{
 
 	public final static String MESSAGGIO= "Grazie di aver giocato!";
 	private final static String NOME = "ConcreteComando";

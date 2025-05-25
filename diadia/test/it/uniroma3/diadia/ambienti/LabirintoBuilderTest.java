@@ -38,9 +38,6 @@ public class LabirintoBuilderTest {
 
 	@Test
 	public void testAddAttrezzoSenzaStanza(){
-		
-		//lb.addAttrezzo("cacciavite", 3);
-		//Attrezzo expected = new Attrezzo("cacciavite", 3);
 		assertEquals(LabirintoBuilder.class, labirintoBuilder.addAttrezzo("cacciavite", 3).getClass());
 	}
 	

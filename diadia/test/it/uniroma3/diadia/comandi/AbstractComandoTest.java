@@ -16,7 +16,7 @@ public class AbstractComandoTest {
 	
 	@BeforeEach
 	public void setUp() throws Exception{
-		this.comando = new ComandoDummy();
+		this.comando = new FintoComando();
 		this.partita = new Partita();
 		this.io = new IOConsole();
 	}

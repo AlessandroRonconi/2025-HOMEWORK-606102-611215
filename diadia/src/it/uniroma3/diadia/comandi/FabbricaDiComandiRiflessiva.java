@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 	
-	public AbstractComando costruisciComando(String istruzione) throws Exception {
+	public AbstractComando costruisciComando(String istruzione){
 		Scanner scannerDiParole = new Scanner(istruzione); // es. ‘vai sud’
 		String nomeComando = null; // es. ‘vai’
 		String parametro = null; // es. ‘sud’
@@ -12,18 +12,24 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		
 		if (scannerDiParole.hasNext())
 			nomeComando = scannerDiParole.next();//prima parola: nome del comando
+		
 		if (scannerDiParole.hasNext())
 			parametro = scannerDiParole.next();//seconda parola: eventuale parametro
 		
-		StringBuilder nomeClasse = new StringBuilder("it.uniroma3.diadia.comandi.Comando");
+		String nomeClasse;
 		
-		nomeClasse.append( Character.toUpperCase(nomeComando.charAt(0)) );
-		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoV’
-		nomeClasse.append( nomeComando.substring(1) ) ;
-		// es. nomeClasse: ‘it.uniroma3.diadia.comandi.ComandoVai’
-		
-		comando = (AbstractComando)Class.forName(nomeClasse.toString()).getDeclaredConstructor().newInstance();
-		comando.setParametro(parametro);
-		return comando;
+		if (nomeComando == null)
+	        return new ComandoNonValido();
+
+	    nomeClasse = "it.uniroma3.diadia.comandi.Comando" + Character.toUpperCase(nomeComando.charAt(0)) + nomeComando.substring(1);
+
+	    try {
+	        Class<?> classe = Class.forName(nomeClasse);
+	        comando = (AbstractComando) classe.newInstance();
+	        comando.setParametro(parametro);
+	        return comando;
+	    } catch (Exception e) {
+	        return new ComandoNonValido();
+	    }
 	}
 }

@@ -61,23 +61,16 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione, IO io) {
-		AbstractComando comandoDaEseguire;
-		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
+	    FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
+	    AbstractComando comandoDaEseguire = factory.costruisciComando(istruzione);
+	    comandoDaEseguire.esegui(this.partita, io);
 
-		try {
-			comandoDaEseguire = factory.costruisciComando(istruzione);
-			comandoDaEseguire.esegui(this.partita, io);
-		} catch (Exception comandoNonValido) {
-			io.mostraMessaggio("Comando non valido");
-			return false;
-		}
+	    if (this.partita.vinta())
+	        io.mostraMessaggio("Hai vinto!");
+	    if (!this.partita.giocatoreIsVivo())
+	        io.mostraMessaggio("Hai esaurito i CFU...");
 
-		if (this.partita.vinta())
-			io.mostraMessaggio("Hai vinto!");
-		if (!this.partita.giocatoreIsVivo())
-			io.mostraMessaggio("Hai esaurito i CFU...");
-
-		return this.partita.isFinita();
+	    return this.partita.isFinita();
 	}
 
 	public static void main(String[] argc) {

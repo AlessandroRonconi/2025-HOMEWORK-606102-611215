@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -83,7 +85,7 @@ class BorsaTest {
 		borsa.addAttrezzo(piuma);
 		borsa.addAttrezzo(martello);
 		
-		List<Attrezzo> ordinati = List.of(piuma, incudine, martello);
+		List<Attrezzo> ordinati = Arrays.asList(piuma, incudine, martello);
 		assertEquals(ordinati, borsa.getContenutoOrdinatoPerPeso());
 		
 	}
@@ -104,7 +106,7 @@ class BorsaTest {
 		assertEquals(3,borsa.getNumeroAttrezzi());
 		assertEquals(3,borsa.getContenutoOrdinatoPerNome().size());
 
-		List<Attrezzo> attesi = List.of(martelletto, martello, spada);  // [martelletto, martello, spada]
+		List<Attrezzo> attesi = Arrays.asList(martelletto, martello, spada);  // [martelletto, martello, spada]
 		assertEquals(attesi, new ArrayList<>(borsa.getContenutoOrdinatoPerNome()));
 	}
 	
@@ -129,8 +131,8 @@ class BorsaTest {
 		assertEquals(2, mappa.get(10).size());
 
 		// Verifica altri gruppi
-		assertEquals(Set.of(spada), mappa.get(9));
-		assertEquals(Set.of(piuma), mappa.get(1));
+		assertEquals(new HashSet<>(Arrays.asList(spada)), mappa.get(9));
+		assertEquals(new HashSet<>(Arrays.asList(piuma)), mappa.get(1));
 		
 	}
 	
@@ -141,7 +143,7 @@ class BorsaTest {
 		borsa.addAttrezzo(piuma);
 		borsa.addAttrezzo(martello);
 		
-		List<Attrezzo> ordinati = List.of(piuma, incudine, martello);
+		List<Attrezzo> ordinati = Arrays.asList(piuma, incudine, martello);
 		assertEquals(ordinati, new ArrayList<>(borsa.getSortedSetOrdinatoPerPeso()));
 		
 	}

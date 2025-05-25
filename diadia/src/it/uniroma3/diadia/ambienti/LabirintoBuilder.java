@@ -12,12 +12,15 @@ public class LabirintoBuilder extends Labirinto{
 	public LabirintoBuilder() {
 		this.listaStanze = new HashMap<>();
 	}
-
-
+	
+	public Stanza getStanzaIniziale() {
+		return stanzaIniziale;
+	}
+	
 	public LabirintoBuilder addStanzaIniziale(String nomeStanza) {
 		Stanza stanzaIniziale = new Stanza(nomeStanza);
 		this.setStanzaCorrente(stanzaIniziale);
-		this.stanzaIniziale = stanzaIniziale;
+		this.stanzaIniziale=stanzaIniziale;
 		this.ultimaStanzaAggiunta = stanzaIniziale;
 		this.listaStanze.put(nomeStanza, stanzaIniziale);
 		return this;
@@ -30,23 +33,7 @@ public class LabirintoBuilder extends Labirinto{
 		this.listaStanze.put(nomeStanza, stanzaVincente);
 		return this;
 	}
-
-	public LabirintoBuilder addAttrezzo(String nome, int peso) {
-		if(this.ultimaStanzaAggiunta!=null) {
-			this.ultimaStanzaAggiunta.addAttrezzo(new Attrezzo(nome,peso));
-		}
-		return this;
-	}
-
-	public LabirintoBuilder addAdiacenza(String nomeStanzaPartenza, String nomeStanzaDestinazione, String direzione) {
-		Stanza partenza = this.listaStanze.get(nomeStanzaPartenza);
-		Stanza destinazione = this.listaStanze.get(nomeStanzaDestinazione);
-		if (partenza != null && destinazione != null) {
-			partenza.impostaStanzaAdiacente(direzione, destinazione);
-		}
-		return this;
-	}
-
+	
 	public LabirintoBuilder addStanza(String nome) {
 		if (!this.listaStanze.containsKey(nome)) {
 			Stanza nuova = new Stanza(nome);
@@ -55,7 +42,7 @@ public class LabirintoBuilder extends Labirinto{
 		}
 		return this;
 	}
-
+	
 	public LabirintoBuilder addStanzaBloccata(String string, String string2, String string3) {
 		if(!this.listaStanze.containsKey(string)) {
 			Stanza nuova = new StanzaBloccata(string, string2, string3);
@@ -82,8 +69,24 @@ public class LabirintoBuilder extends Labirinto{
 		}
 		return this;
 	}
+	
+	public LabirintoBuilder addAdiacenza(String nomeStanzaPartenza, String nomeStanzaDestinazione, String direzione) {
+		Stanza partenza = this.listaStanze.get(nomeStanzaPartenza);
+		Stanza destinazione = this.listaStanze.get(nomeStanzaDestinazione);
+		if (partenza != null && destinazione != null) {
+			partenza.impostaStanzaAdiacente(direzione, destinazione);
+		}
+		return this;
+	}
+
+	public LabirintoBuilder addAttrezzo(String nome, int peso) {
+		if(this.ultimaStanzaAggiunta!=null) {
+			this.ultimaStanzaAggiunta.addAttrezzo(new Attrezzo(nome,peso));
+		}
+		return this;
+	}
 
 	public Map<String,Stanza> getListaStanze() {
 		return this.listaStanze;
-	}	
+	}
 }
