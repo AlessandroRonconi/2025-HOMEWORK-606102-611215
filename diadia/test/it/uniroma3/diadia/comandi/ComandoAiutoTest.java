@@ -27,7 +27,7 @@ class ComandoAiutoTest {
 		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
-		for(String s : ComandoAiuto.getNomiComandi()) {
+		for(String s : ComandoAiuto.getElencoComandi()) {
 			assertEquals(s+" ", io.getNextOutput());
 		}
 		io.getNextOutput();
