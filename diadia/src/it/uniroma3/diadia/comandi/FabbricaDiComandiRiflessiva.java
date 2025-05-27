@@ -16,16 +16,16 @@ public class FabbricaDiComandiRiflessiva implements FabbricaDiComandi {
 		if (scannerDiParole.hasNext())
 			parametro = scannerDiParole.next();//seconda parola: eventuale parametro
 		
-		String nomeClasse;
+		StringBuilder nomeClasse = new StringBuilder("it.uniroma3.diadia.comandi.Comando");
 		
 		if (nomeComando == null)
 	        return new ComandoNonValido();
 
-	    nomeClasse = "it.uniroma3.diadia.comandi.Comando" + Character.toUpperCase(nomeComando.charAt(0)) + nomeComando.substring(1);
+	    nomeClasse.append(Character.toUpperCase(nomeComando.charAt(0)));
+	    nomeClasse.append(nomeComando.substring(1));
 
 	    try {
-	        Class<?> classe = Class.forName(nomeClasse);
-	        comando = (AbstractComando) classe.newInstance();
+	        comando = (AbstractComando) Class.forName(nomeClasse.toString()).newInstance();
 	        comando.setParametro(parametro);
 	        return comando;
 	    } catch (Exception e) {
