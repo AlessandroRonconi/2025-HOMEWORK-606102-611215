@@ -16,7 +16,7 @@ import it.uniroma3.diadia.attrezzi.ComparatorePerNomeEPeso;
 
 public class Borsa{
 	private static final int PESO_MASSIMO_DEFAULT = 10;
-	private List <Attrezzo> attrezzi;
+	private Set<Attrezzo> attrezzi;
 	private int pesoMax;
 
 	public Borsa() {
@@ -25,7 +25,7 @@ public class Borsa{
 
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new ArrayList<>();
+		this.attrezzi = new HashSet<>();
 	}
 
 	public int getPesoMax() {
@@ -33,11 +33,12 @@ public class Borsa{
 	}
 
 	public int getPeso() {
-		int pesoTotale = 0;
-		for(Attrezzo attrezzo: attrezzi) {
-			pesoTotale += attrezzo.getPeso();
-		}
-		return pesoTotale;
+//		int pesoTotale = 0;
+//		for(Attrezzo attrezzo: attrezzi.values()) {
+//			pesoTotale += attrezzo.getPeso();
+//		}
+//		return pesoTotale;
+		return attrezzi.stream().mapToInt(Attrezzo::getPeso).sum();
 	}
 
 	public boolean addAttrezzo(Attrezzo attrezzo) {
@@ -47,22 +48,28 @@ public class Borsa{
 	}
 
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
-
-		for(Attrezzo attrezzo : this.attrezzi) {
-			if(attrezzo.getNome().equals(nomeAttrezzo)) {
-				this.attrezzi.remove(attrezzo);
-				return attrezzo;
-			}
-		}
-		return null;
+//		return this.attrezzi.remove(nomeAttrezzo);
+		for (Attrezzo a : attrezzi) {
+            if (a.getNome().equals(nomeAttrezzo)) {
+                attrezzi.remove(a);
+                return a;
+            }
+        }
+        return null;
 	}
 
 	public Attrezzo getAttrezzo(String nomeAttrezzo) {
-		for (Attrezzo attrezzo : this.attrezzi)
-			if (attrezzo.getNome().equals(nomeAttrezzo))
-				return attrezzo;
-
-		return null;
+//		Attrezzo attrezzoCercato;
+//		attrezzoCercato = null;
+//		if (this.attrezzi.containsKey(nomeAttrezzo))
+//			attrezzoCercato = this.attrezzi.get(nomeAttrezzo);
+//		return attrezzoCercato;
+		
+		for (Attrezzo a : attrezzi) {
+            if (a.getNome().equals(nomeAttrezzo))
+                return a;
+        }
+        return null;
 	}
 
 	public boolean hasAttrezzo(String nomeAttrezzo) {
@@ -84,7 +91,7 @@ public class Borsa{
 //	}
 
 	private List<Attrezzo> getAttrezzi() {
-		return this.attrezzi;
+		return new ArrayList<>(this.attrezzi);
 	}
 
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
@@ -119,11 +126,7 @@ public class Borsa{
 	}
 
 	public boolean isEmpty() {
-		int numeroAttrezzi = 0;
-		for(Attrezzo attrezzo : this.attrezzi) {
-			numeroAttrezzi++;
-		}
-		return numeroAttrezzi==0;
+		return this.attrezzi.isEmpty();
 	}
 
 	public String toString() {
