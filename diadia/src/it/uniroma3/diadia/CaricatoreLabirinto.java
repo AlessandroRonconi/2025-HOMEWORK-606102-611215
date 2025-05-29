@@ -86,7 +86,9 @@ public class CaricatoreLabirinto {
 		Scanner scanner = new Scanner(string);
 		scanner.useDelimiter(",");
 		try (Scanner scannerDiParole = scanner) {
-			result.add(scannerDiParole.next());
+			while(scannerDiParole.hasNext()) {
+				result.add(scannerDiParole.next());
+			}
 		}
 		return result;
 	}
