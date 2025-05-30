@@ -9,9 +9,8 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 public class Strega extends AbstractPersonaggio{
 	private static final String MESSAGGIO_DONO = "ihihihihihihih";
 	private Attrezzo attrezzo;
-	public Strega(String nome, String presentaz, Attrezzo attrezzo) {
+	public Strega(String nome, String presentaz) {
 		super(nome, presentaz);
-		this.attrezzo = attrezzo;
 	}
 	@Override
 	public String agisci(Partita partita) {

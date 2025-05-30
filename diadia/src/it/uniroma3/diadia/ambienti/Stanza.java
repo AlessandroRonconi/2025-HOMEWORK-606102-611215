@@ -61,7 +61,7 @@ public class Stanza {
 	 * Restituisce la stanza adiacente nella direzione specificata
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -151,11 +151,11 @@ public class Stanza {
 	}
 
 
-	public List<String> getDirezioni() {
+	public List<Direzione> getDirezioni() {
 	    return new ArrayList<>(this.stanzeAdiacenti.keySet());
 	}
 
-	public Map<String, Stanza> getMapStanzeAdiacenti() {
+	public Map<Direzione, Stanza> getMapStanzeAdiacenti() {
 		return this.stanzeAdiacenti;
 	}
 	

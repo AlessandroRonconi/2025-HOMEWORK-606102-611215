@@ -61,7 +61,7 @@ public class Labirinto {
 //		stanzaVincente = biblioteca;
 //	}
 	
-	public LabirintoBuilder newBuilder(String labirinto) throws FileNotFoundException, FormatoFileNonValidoException {
+	public static LabirintoBuilder newBuilder(String labirinto) throws FileNotFoundException, FormatoFileNonValidoException {
 		return new LabirintoBuilder(labirinto);
 	}
 
@@ -133,8 +133,8 @@ public class Labirinto {
 			return this;
 		}
 
-		public LabirintoBuilder  addCane(String nome, String presentazione) {
-			Cane c = new Cane(nome, presentazione);
+		public LabirintoBuilder  addCane(String nome, String presentazione, Attrezzo attrezzo) {
+			Cane c = new Cane(nome, presentazione, attrezzo);
 			if(this.ultimaStanzaAggiunta==null)
 				return this;
 			this.ultimaStanzaAggiunta.setPersonaggio(c);

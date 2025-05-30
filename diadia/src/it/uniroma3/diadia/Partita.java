@@ -17,12 +17,6 @@ public class Partita {
 	private boolean finita;
 	private Labirinto labirinto; 
 	private Giocatore player;
-	
-	public Partita(){
-		this.labirinto = new Labirinto();
-		this.player = new Giocatore();
-		this.finita = false;
-	}
 
 	public Partita(Labirinto labirinto){
 		this.labirinto = labirinto;
