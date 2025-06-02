@@ -17,14 +17,10 @@ class StanzaMagicaProtected extends StanzaProtected {
 	}
 	@Override
 	public boolean addAttrezzo(Attrezzo attrezzo) {
-		if(this.contatoreAttrezziPosati>this.sogliaMagica)
+		if(++this.contatoreAttrezziPosati>this.sogliaMagica)
 			attrezzo = this.modificaAttrezzo(attrezzo);
 
-		if(this.attrezzi.add(attrezzo) == true) {
-			this.contatoreAttrezziPosati++;
-			return true;
-		}
-		return false;
+		return this.addAttrezzo(attrezzo);
 
 	}
 
@@ -35,5 +31,10 @@ class StanzaMagicaProtected extends StanzaProtected {
 		nomeInvertito = nomeInvertito.reverse();
 		attrezzo = new Attrezzo(nomeInvertito.toString(), pesoX2);
 		return attrezzo;
+	}
+	
+	@Override
+	public boolean isMagica() {
+		return true;
 	}
 }
