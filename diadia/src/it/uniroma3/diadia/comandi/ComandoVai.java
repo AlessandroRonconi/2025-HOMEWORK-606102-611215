@@ -35,6 +35,6 @@ public class ComandoVai extends AbstractComando {
 	
 	@Override
 	public void setParametro(String parametro) {
-		this.direzione = Direzione.valueOf(parametro);
+		if(parametro!=null) this.direzione = Direzione.valueOf(parametro);
 	}
 }

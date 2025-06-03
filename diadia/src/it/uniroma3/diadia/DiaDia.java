@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import java.util.Scanner;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.comandi.AbstractComando;
 import it.uniroma3.diadia.comandi.FabbricaDiComandi;
@@ -29,7 +31,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	
+
 
 	private Partita partita;
 	private IO io;
@@ -55,26 +57,49 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione, IO io) {
-	    FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
-	    AbstractComando comandoDaEseguire = factory.costruisciComando(istruzione, io);
-	    comandoDaEseguire.esegui(this.partita);
+		FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
+		AbstractComando comandoDaEseguire = factory.costruisciComando(istruzione, io);
+		comandoDaEseguire.esegui(this.partita);
 
-	    if (this.partita.vinta())
-	        io.mostraMessaggio("Hai vinto!");
-	    if (!this.partita.giocatoreIsVivo())
-	        io.mostraMessaggio("Hai esaurito i CFU...");
+		if (this.partita.vinta())
+			io.mostraMessaggio("Hai vinto!");
+		if (!this.partita.giocatoreIsVivo())
+			io.mostraMessaggio("Hai esaurito i CFU...");
 
-	    return this.partita.isFinita();
+		return this.partita.isFinita();
 	}
 
 	public static void main(String[] argc) throws Exception{
-		IO io = new IOConsole();
-		Labirinto labirinto = Labirinto.newBuilder("labirinto1.txt").getLabirinto();
-//		.addStanzaIniziale("LabCampusOne")
-//		.addStanzaVincente("Biblioteca")
-//		.addAdiacenza("LabCampusOne","Biblioteca","ovest")
-//		.getLabirinto();
-		DiaDia gioco = new DiaDia(labirinto,io);
-		gioco.gioca();
+//		try (Scanner scanner = new Scanner(System.in)) {     <---- versione senza livelli
+//			IO io = new IOConsole(scanner);
+//			Labirinto labirinto = Labirinto.newBuilder("labirinto1.txt").getLabirinto();
+//			DiaDia gioco = new DiaDia(labirinto, io);
+//			gioco.gioca();
+//		}
+		try (Scanner scanner = new Scanner(System.in)) {
+			IO io = new IOConsole(scanner);
+			int livello = 1;
+
+			while (true) {
+				String nomeFileLabirinto = "labirinto" + livello + ".txt";
+				Labirinto labirinto;
+
+				// Prova a caricare il labirinto per il livello corrente
+				try {
+					labirinto = Labirinto.newBuilder(nomeFileLabirinto).getLabirinto();
+				} catch (Exception e) {
+					io.mostraMessaggio("Complimenti! Hai completato tutti i livelli!");
+					break;
+				}
+
+				io.mostraMessaggio("Inizio del livello " + livello);
+				DiaDia gioco = new DiaDia(labirinto, io);
+				gioco.gioca();
+
+				if (gioco.partita.vinta())
+					livello++;
+				else return;
+			}
+		}
 	}
 }

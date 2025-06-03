@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendiTest {
@@ -27,11 +29,12 @@ public class ComandoPrendiTest {
 
 	@BeforeEach
 	void setUp() throws Exception{
-		partita = new Partita();
+		partita = new Partita(Labirinto.newBuilder("labirinto2.txt").getLabirinto());
 		attrezzo = new Attrezzo("martello", 2);
 		attrezzoPesante = new Attrezzo("incudine", 15);
 		comando = new ComandoPrendi();
-		io = new IOConsole();
+		io = new IOConsole(new Scanner(System.in));
+		comando.setIO(io);
 	}
 
 
@@ -39,32 +42,33 @@ public class ComandoPrendiTest {
 	public void testAttrezzoPreso() {
 		partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzo);
 		comando.setParametro("martello");
-		comando.esegui(partita,io);
+		comando.esegui(partita);
 		assertTrue(partita.getGiocatore().getBorsa().hasAttrezzo("martello"));
 	}
 
 	@Test
 	public void testAttrezzoDaPrendereNonPresente() {
-		comando.setParametro("martello");
-		comando.esegui(partita,io);
-		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo("martello"));
+		comando.setParametro("forbici");
+		comando.esegui(partita);
+		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo("forbici"));
 	}
 	
 	@Test
 	public void testAttrezzoTroppoPesante() {
 		partita.getLabirinto().getStanzaCorrente().addAttrezzo(attrezzoPesante);
 		comando.setParametro("martello");
-		comando.esegui(partita,io);
+		comando.esegui(partita);
 		assertFalse(partita.getGiocatore().getBorsa().hasAttrezzo("incudine"));
 	}
 	
 	@Test
-	public void testPartitaConComandoPrendi(){
+	public void testPartitaConComandoPrendi() throws Exception{
 		List<String> daLeggere = new ArrayList<>();
 		daLeggere.add("prendi osso");
 		daLeggere.add("fine");
 		IOSimulator io = new IOSimulator(daLeggere);
-		DiaDia gioco = new DiaDia(io);
+		Labirinto labirinto = Labirinto.newBuilder("labirinto1.txt").getLabirinto();
+		DiaDia gioco = new DiaDia(labirinto,io);
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
 		assertEquals("Hai preso osso", io.getNextOutput());
