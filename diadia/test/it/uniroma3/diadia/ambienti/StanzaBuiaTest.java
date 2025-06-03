@@ -27,7 +27,7 @@ class StanzaBuiaTest {
 	void testIlluminata() {
 		this.stanza.addAttrezzo(lanterna);
 		assertTrue(this.stanza.hasAttrezzo("lanterna"));
-		assertFalse(this.stanza.getDescrizione().equals("qui c'è un buio pesto"));
+		assertTrue(this.stanza.getDescrizione().equals(this.stanza.toString()));
 	}
 
 }

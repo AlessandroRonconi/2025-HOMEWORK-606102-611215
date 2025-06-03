@@ -1,6 +1,5 @@
 package it.uniroma3.diadia.comandi;
 
-import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -8,19 +7,19 @@ public class ComandoPosa extends AbstractComando {
 	private String nomeAttrezzo;
 
 	@Override
-	public void esegui(Partita partita, IO io) {
+	public void esegui(Partita partita) {
 		if(nomeAttrezzo==null) {
-			io.mostraMessaggio("Quale attrezzo vuoi posare?");
+			getIO().mostraMessaggio("Quale attrezzo vuoi posare?");
 			return;
 		}
 		Attrezzo vecchioAttrezzo = partita.getGiocatore().getBorsa().getAttrezzo(nomeAttrezzo);
 		if(vecchioAttrezzo==null) {
-			io.mostraMessaggio("Attrezzo inesistente");
+			getIO().mostraMessaggio("Attrezzo inesistente");
 			return;
 		}
 		partita.getLabirinto().getStanzaCorrente().addAttrezzo(vecchioAttrezzo);
 		partita.getGiocatore().getBorsa().removeAttrezzo(nomeAttrezzo);
-		io.mostraMessaggio("Hai posato " + nomeAttrezzo);
+		getIO().mostraMessaggio("Hai posato " + nomeAttrezzo);
 
 	}
 

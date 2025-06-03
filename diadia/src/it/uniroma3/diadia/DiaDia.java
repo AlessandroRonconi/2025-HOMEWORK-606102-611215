@@ -56,8 +56,8 @@ public class DiaDia {
 	 */
 	private boolean processaIstruzione(String istruzione, IO io) {
 	    FabbricaDiComandi factory = new FabbricaDiComandiRiflessiva();
-	    AbstractComando comandoDaEseguire = factory.costruisciComando(istruzione);
-	    comandoDaEseguire.esegui(this.partita, io);
+	    AbstractComando comandoDaEseguire = factory.costruisciComando(istruzione, io);
+	    comandoDaEseguire.esegui(this.partita);
 
 	    if (this.partita.vinta())
 	        io.mostraMessaggio("Hai vinto!");

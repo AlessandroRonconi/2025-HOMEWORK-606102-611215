@@ -69,7 +69,12 @@ public class CaricatoreLabirinto {
 
 	public CaricatoreLabirinto(String nomeFile) throws FileNotFoundException {
 		this.nome2stanza = new HashMap<String,Stanza>();
-		this.reader = new LineNumberReader(new FileReader(nomeFile));
+		
+		InputStream inputStream = CaricatoreLabirinto.class.getClassLoader().getResourceAsStream(nomeFile);
+		if (inputStream == null) throw new FileNotFoundException("Impossibile trovare " + nomeFile);
+		Reader fileReader = new InputStreamReader(inputStream);
+		
+		this.reader = new LineNumberReader(fileReader);
 	}
 	
 	public CaricatoreLabirinto(StringReader reader) throws FileNotFoundException {

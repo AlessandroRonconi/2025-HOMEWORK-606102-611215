@@ -7,7 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
+import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 public class AbstractComandoTest {
 	AbstractComando comando;
@@ -17,13 +19,12 @@ public class AbstractComandoTest {
 	@BeforeEach
 	public void setUp() throws Exception{
 		this.comando = new FintoComando();
-		this.partita = new Partita();
-		this.io = new IOConsole();
+		this.partita = new Partita(Labirinto.newBuilder("labirinto1.txt").getLabirinto());
 	}
 	
 	@Test
 	public void testEsegui() {
-		comando.esegui(partita, io);
+		comando.esegui(partita);
 		assertTrue(partita.isFinita());
 	}
 	

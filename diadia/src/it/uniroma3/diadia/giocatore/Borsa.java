@@ -16,7 +16,7 @@ import it.uniroma3.diadia.attrezzi.ComparatorePerNomeEPeso;
 
 
 public class Borsa{
-	private static final int PESO_MASSIMO_DEFAULT = Configuratore.getPesoMax();
+	private static final int PESO_MASSIMO_DEFAULT = Configuratore.getProprieta("pesoMax");
 	private Map<String, List<Attrezzo>> attrezzi;
 	private int pesoMax;
 

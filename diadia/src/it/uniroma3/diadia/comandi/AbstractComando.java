@@ -19,9 +19,16 @@ public abstract class AbstractComando {
 	/**
 	 * esecuzione del comando
 	 */
-	public abstract void esegui(Partita partita, IO io);
+	private IO io;
+	public abstract void esegui(Partita partita);
 	public void setParametro(String parametro) {}
 	public String getParametro() {
 		return null;
+	}
+	public void setIO(IO io) {
+		this.io = io;
+	}
+	public IO getIO() {
+		return this.io;
 	}
 }

@@ -11,18 +11,23 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IOSimulator;
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 class ComandoFineTest {
+	private List<String> daLeggere;
 
 	@BeforeEach
-	void setUp() throws Exception {}
+	void setUp() throws Exception {
+		daLeggere = new ArrayList<>();
+	}
 	
 	@Test
-	public void testPartitaConComandoFine(){
-		List<String> daLeggere = new ArrayList<>();
+	public void testPartitaConComandoFine() throws Exception{
+		
 		daLeggere.add("fine");
 		IOSimulator io = new IOSimulator(daLeggere);
-		DiaDia gioco = new DiaDia(io);
+		Labirinto labirinto = Labirinto.newBuilder("labirinto1.txt").getLabirinto();
+		DiaDia gioco = new DiaDia(labirinto,io);
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
 		assertEquals("Grazie di aver giocato!", io.getNextOutput());
