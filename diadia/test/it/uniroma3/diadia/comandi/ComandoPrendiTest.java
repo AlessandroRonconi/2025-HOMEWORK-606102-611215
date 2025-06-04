@@ -72,6 +72,6 @@ public class ComandoPrendiTest {
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
 		assertEquals("Hai preso osso", io.getNextOutput());
-		assertEquals("Grazie di aver giocato!", io.getNextOutput());
+		assertEquals("\n"+"Grazie di aver giocato!", io.getNextOutput());
 	}
 }

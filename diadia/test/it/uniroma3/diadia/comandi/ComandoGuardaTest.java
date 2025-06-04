@@ -29,7 +29,7 @@ class ComandoGuardaTest {
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
 		assertTrue(io.getNextOutput().contains("biblioteca"));
-		assertEquals("Grazie di aver giocato!", io.getNextOutput());
+		assertEquals("\n"+"Grazie di aver giocato!", io.getNextOutput());
 	}
 
 

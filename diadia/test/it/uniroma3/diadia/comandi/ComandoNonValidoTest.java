@@ -29,7 +29,7 @@ class ComandoNonValidoTest {
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
 		assertEquals(io.getNextOutput(), "Comando non valido");
-		assertEquals("Grazie di aver giocato!", io.getNextOutput());
+		assertEquals("\n"+"Grazie di aver giocato!", io.getNextOutput());
 	}
 
 }

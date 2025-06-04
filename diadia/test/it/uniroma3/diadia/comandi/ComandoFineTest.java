@@ -30,7 +30,7 @@ class ComandoFineTest {
 		DiaDia gioco = new DiaDia(labirinto,io);
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
-		assertEquals("Grazie di aver giocato!", io.getNextOutput());
+		assertEquals("\n"+"Grazie di aver giocato!", io.getNextOutput());
 	}
 
 }

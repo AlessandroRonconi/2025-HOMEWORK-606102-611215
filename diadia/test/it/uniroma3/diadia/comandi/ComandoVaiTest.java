@@ -72,6 +72,6 @@ public class ComandoVaiTest {
 		gioco.gioca();
 		assertEquals(DiaDia.MESSAGGIO_BENVENUTO, io.getNextOutput());
 		assertTrue(io.getNextOutput().contains("N11"));
-		assertEquals("Hai vinto!", io.getNextOutput());
+		assertEquals("\n"+"Hai vinto!", io.getNextOutput());
 	}
 }
