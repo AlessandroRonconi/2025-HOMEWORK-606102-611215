@@ -65,8 +65,8 @@ public class Partita {
 	}
 
 	public String toString() {
-		return this.getLabirinto().getStanzaCorrente() + "\nCFU = " + this.player.getCFU()
-		+ "\n" + this.player.getBorsa().toString();
+		return "\n" + this.getLabirinto().getStanzaCorrente() + "\nCFU = " + this.player.getCFU()
+		+ "\n" + this.player.getBorsa().toString() + "\n";
 	}
 
 	public boolean giocatoreIsVivo() {

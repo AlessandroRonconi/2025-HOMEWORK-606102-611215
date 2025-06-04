@@ -62,9 +62,9 @@ public class DiaDia {
 		comandoDaEseguire.esegui(this.partita);
 
 		if (this.partita.vinta())
-			io.mostraMessaggio("Hai vinto!");
+			io.mostraMessaggio("\n"+"Hai vinto!");
 		if (!this.partita.giocatoreIsVivo())
-			io.mostraMessaggio("Hai esaurito i CFU...");
+			io.mostraMessaggio("\n"+"Hai esaurito i CFU...");
 
 		return this.partita.isFinita();
 	}
@@ -92,13 +92,14 @@ public class DiaDia {
 					break;
 				}
 
-				io.mostraMessaggio("Inizio del livello " + livello);
+				io.mostraMessaggio("\n" + "Livello " + livello + "\n");
 				DiaDia gioco = new DiaDia(labirinto, io);
 				gioco.gioca();
 
 				if (gioco.partita.vinta())
 					livello++;
-				else return;
+				else if(gioco.partita.giocatoreIsVivo() && gioco.partita.isFinita()) return;
+				else livello = 1;
 			}
 		}
 	}

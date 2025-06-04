@@ -28,9 +28,9 @@ public class ComandoVai extends AbstractComando {
 			getIO().mostraMessaggio("Direzione inesistente");
 			return;
 		}
+		partita.getGiocatore().setCFU(partita.getGiocatore().getCFU()-1);
 		partita.getLabirinto().setStanzaCorrente(prossimaStanza);
 		getIO().mostraMessaggio(partita.toString());
-		partita.getGiocatore().setCFU(partita.getGiocatore().getCFU()-1);
 	}
 	
 	@Override

@@ -6,7 +6,7 @@ public class ComandoFine extends AbstractComando {
 
 	@Override
 	public void esegui(Partita partita) {
-		getIO().mostraMessaggio("Grazie di aver giocato!");  // si desidera smettere
+		getIO().mostraMessaggio("\n"+"Grazie di aver giocato!");  // si desidera smettere
 		partita.setFinita();
 	}
 }
